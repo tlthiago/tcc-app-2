@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Criar conta</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,50 +14,41 @@
   <ion-card>
     <ion-card-content>
         <form [formGroup]="form" (ngSubmit)="register()">
-          <ion-item class="ion-margin-bottom">
-            <ion-label position="floating"></ion-label>
-            <ion-input 
-              label="Nome" 
-              label-placement="floating" 
-              fill="outline" 
-              placeholder="Insira o seu nome" 
-              type="text"
-              id="nome"
-              class="nome"
-              formControlName="nome">
-            </ion-input>
-            <ion-text color="danger" 
-              *ngIf="(form.get('nome')?.errors?.['required'] || 
-              form.get('nome')?.errors?.['minlength'] || 
-              form.get('nome')?.errors?.['maxlength']) && 
-              form.get('nome')?.touched">
-              Informe um nome que tenha de 3 a 30 caracteres!
-            </ion-text>
-          </ion-item>
+          <!-- <ion-input 
+            label="Nome" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Insira o seu nome" 
+            type="text"
+            formControlName="nome">
+          </ion-input>
+          <ion-text color="danger" 
+            *ngIf="(form.get('nome')?.errors?.['required'] || 
+            form.get('nome')?.errors?.['minlength'] || 
+            form.get('nome')?.errors?.['maxlength']) && 
+            form.get('nome')?.touched">
+            Informe um nome que tenha de 3 a 30 caracteres.
+          </ion-text>
           
-          <ion-item class="ion-margin-bottom">
-            <ion-label position="floating"></ion-label>
-            <ion-input 
-              label="Sobrenome" 
-              label-placement="floating" 
-              fill="outline" 
-              placeholder="Insira o seu sobrenome" 
-              type="text"
-              id="sobrenome"
-              class="sobrenome"
-              formControlName="sobrenome">
-            </ion-input>
-            <ion-text 
-              color="danger" 
-              *ngIf="(form.get('sobrenome')?.errors?.['required'] || 
-              form.get('sobrenome')?.errors?.['minlength'] || 
-              form.get('sobrenome')?.errors?.['maxlength']) && 
-              form.get('sobrenome')?.touched">
-              Informe um sobrenome que tenha de 3 a 30 caracteres!
-            </ion-text>
-          </ion-item>
+          <ion-input 
+            label="Sobrenome" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Insira o seu sobrenome" 
+            type="text"
+            formControlName="sobrenome"
+            class="ion-margin-top">
+          </ion-input>
+          <ion-text 
+            color="danger" 
+            *ngIf="(form.get('sobrenome')?.errors?.['required'] || 
+            form.get('sobrenome')?.errors?.['minlength'] || 
+            form.get('sobrenome')?.errors?.['maxlength']) && 
+            form.get('sobrenome')?.touched">
+            Informe um sobrenome que tenha de 3 a 30 caracteres.
+          </ion-text> -->
 
-          <ion-grid>
+          <!-- <ion-grid>
             <ion-row class="ion-justify-content-around">
               <ion-col>
                 <ion-item>
@@ -139,28 +130,24 @@
                 </ion-item>
               </ion-col>
             </ion-row>
-          </ion-grid>
+          </ion-grid> -->
 
-          <ion-item class="ion-margin-bottom">
-            <ion-label position="floating"></ion-label>
-            <ion-select 
-              label="Gênero" 
-              label-placement="floating" 
-              fill="outline"
-              id="genero"
-              class="genero"
-              formControlName="genero">
-                <ion-select-option value="homem">Homem</ion-select-option>
-                <ion-select-option value="mulher">Mulher</ion-select-option>
-                <ion-select-option value="naoInformado">Prefiro não dizer</ion-select-option>
-            </ion-select>
-            <ion-text 
-              color="danger" 
-              *ngIf="(form.get('genero')?.errors?.['required']) && 
-              form.get('genero')?.touched">
-              Selecione o gênero!
-            </ion-text>
-          </ion-item>
+          <!-- <ion-select 
+            label="Gênero" 
+            label-placement="floating" 
+            fill="outline"
+            formControlName="genero"
+            class="ion-margin-top">
+              <ion-select-option value="homem">Homem</ion-select-option>
+              <ion-select-option value="mulher">Mulher</ion-select-option>
+              <ion-select-option value="naoInformado">Prefiro não dizer</ion-select-option>
+          </ion-select>
+          <ion-text 
+            color="danger" 
+            *ngIf="(form.get('genero')?.errors?.['required']) && 
+            form.get('genero')?.touched">
+            Selecione o gênero.
+          </ion-text> -->
 
           <!-- <ion-item>
             <ion-input 
@@ -174,88 +161,73 @@
             </ion-input>
           </ion-item> -->
 
-          <ion-item class="ion-margin-bottom">
-            <ion-label position="floating"></ion-label>
-            <ion-input 
-              label="Email" 
-              label-placement="floating" 
-              fill="outline" 
-              placeholder="Insira o seu email" 
-              type="email"
-              id="email"
-              class="email"
-              formControlName="email">
-            </ion-input>
-            <ion-text 
-              color="danger" 
-              *ngIf="(form.get('email')?.errors?.['required'] || 
-              form.get('email')?.errors?.['email'] ) && 
-              form.get('email')?.touched">
-              Informe um e-mail válido.
-            </ion-text>
-          </ion-item>
+          <ion-input 
+            label="Email" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Insira o seu email" 
+            type="email"
+            formControlName="email"
+            class="ion-margin-top">
+          </ion-input>
+          <ion-text 
+            color="danger" 
+            *ngIf="(form.get('email')?.errors?.['required'] || 
+            form.get('email')?.errors?.['email'] ) && 
+            form.get('email')?.touched">
+            Informe um e-mail válido.
+          </ion-text>
 
-          <ion-item class="ion-margin-bottom">
-            <ion-label position="floating"></ion-label>
-            <ion-input 
-              label="Senha" 
-              label-placement="floating" 
-              fill="outline" 
-              placeholder="Insira sua senha" 
-              type="password"
-              id="senha"
-              class="senha"
-              formControlName="senha">
-                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-            </ion-input>
-            <ion-text 
-              color="danger" 
-              *ngIf="(form.get('senha')?.errors?.['required'] || 
-              form.get('senha')?.errors?.['minlength'] || 
-              form.get('senha')?.errors?.['maxlength']) && 
-              form.get('senha')?.touched">Informe uma senha que tenha entre 6 e 12 dígitos.
-            </ion-text>
-          </ion-item>
+          <ion-input 
+            label="Senha" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Insira sua senha" 
+            type="password"
+            formControlName="password"
+            class="ion-margin-top">
+          </ion-input>
+          <ion-text 
+            color="danger" 
+            *ngIf="(form.get('password')?.errors?.['required'] || 
+            form.get('password')?.errors?.['minlength'] || 
+            form.get('password')?.errors?.['maxlength']) && 
+            form.get('password')?.touched">Informe uma senha que tenha entre 6 e 12 dígitos.
+          </ion-text>
 
-          <ion-item class="ion-margin-bottom">
-            <ion-label position="floating"></ion-label>
-            <ion-input 
-              label="Confirmar Senha" 
-              label-placement="floating" 
-              fill="outline" 
-              placeholder="Insira a senha anterior" 
-              type="password"
-              id="senhaConfirm"
-              class="senhaConfirm"
-              formControlName="senhaConfirm">
-                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-            </ion-input>
-            <ion-text 
-              color="danger" 
-              *ngIf="(form.get('senhaConfirm')?.errors?.['required'] || 
-              form.get('senhaConfirm')?.errors?.['minlength'] || 
-              form.get('senhaConfirm')?.errors?.['maxlength']) && 
-              form.get('senhaConfirm')?.touched">
-              As senhas não conferem.
-            </ion-text>
-          </ion-item>
+          <!-- <ion-input 
+            label="Confirmar Senha" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Insira a senha anterior" 
+            type="password"
+            formControlName="senhaConfirm"
+            class="ion-margin-top">
+          </ion-input>
+          <ion-text 
+            color="danger" 
+            *ngIf="(form.get('senhaConfirm')?.errors?.['required'] || 
+            form.get('senhaConfirm')?.errors?.['minlength'] || 
+            form.get('senhaConfirm')?.errors?.['maxlength']) && 
+            form.get('senhaConfirm')?.touched">
+            As senhas não conferem.
+          </ion-text> -->
+
+          <ion-button 
+            type="submit"
+            expand="block"
+            [disabled]="!form.valid"
+            class="ion-margin-top">
+            Criar conta
+          </ion-button>
+
+          <ion-button 
+            [routerLink]="['/login']"
+            expand="block"
+            class="ion-margin-top">
+            Voltar
+          </ion-button>
           
-          <ion-grid>
-            <ion-row class="ion-justify-content-center">
-              <ion-col>
-                <ion-button [routerLink]="['/login']">Voltar</ion-button>
-              </ion-col>
-
-              <ion-col>
-                <ion-button 
-                  type="submit"
-                  expand="block"
-                  [disabled]="!form.valid">
-                  Criar conta
-              </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
         </form>
       </ion-card-content>
     </ion-card>

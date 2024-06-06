@@ -13,8 +13,8 @@ export class LoginPage implements OnInit {
   form: FormGroup;
 
   constructor(
-    private FormBuilder: FormBuilder,
-    private LoadingController: LoadingController,
+    private formBuilder: FormBuilder,
+    private loadingController: LoadingController,
     private alertController: AlertController,
     private authService: AuthService,
     private router: Router
@@ -28,8 +28,8 @@ export class LoginPage implements OnInit {
     return this.form.get('password');
   }
 
-  ngOnInit(): void {
-    this.form = this.FormBuilder.group({
+  ngOnInit() {
+    this.form = this.formBuilder.group({
       email: ['', 
         Validators.compose([
           Validators.required,
@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    const loading = await this.LoadingController.create();
+    const loading = await this.loadingController.create();
     await loading.present();
 
     const user = await this.authService.login(this.form.value);

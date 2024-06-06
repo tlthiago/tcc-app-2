@@ -3,7 +3,7 @@ import {
   Auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signOut
+  signOut,
  } from '@angular/fire/auth'; 
 
 @Injectable({

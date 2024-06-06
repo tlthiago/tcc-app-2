@@ -1,0 +1,50 @@
+.login-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: linear-gradient(to bottom, #3b5998 50%, #c9c9c9 50%);
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+  margin-top: -150px;
+}
+
+.profile-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.user-name {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.login-card {
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 100%;
+}
+
+ion-item {
+  --background: transparent;
+  --border-width: 0 0 1px 0;
+  --border-color: #dcdcdc;
+}
+
+.forgot-password {
+  margin-top: 15px;
+  margin-top: 10px;
+}

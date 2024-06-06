@@ -1,20 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="profile" href="/tabs/profile">
+      <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-tab-button tab="bookmarks" href="/tabs/bookmarks">
+      <ion-icon aria-hidden="true" name="heart"></ion-icon>
+      <ion-label>Favoritos</ion-label>
+    </ion-tab-button>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+    <ion-tab-button tab="search" href="/tabs/search">
+      <ion-icon aria-hidden="true" name="search"></ion-icon>
+      <ion-label>Pesquisar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="templates" href="/tabs/templates">
+      <ion-icon aria-hidden="true" name="document"></ion-icon>
+      <ion-label>Modelos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="logout()">
+      <ion-icon name="log-out-outline"></ion-icon>
+      <ion-label>Sair</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

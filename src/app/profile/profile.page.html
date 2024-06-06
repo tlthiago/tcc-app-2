@@ -1,0 +1,179 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Perfil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-avatar>
+          <img
+            alt="Silhouette of a person's head"
+            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          />
+        </ion-avatar>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-card-header class="ion-text-center">
+          <!-- <ion-card-subtitle >thiago96luiz&#64;gmail.com</ion-card-subtitle>
+          <ion-card-title>Thiago Alves</ion-card-title> -->
+          <ion-card-subtitle >{{ userData.email }}</ion-card-subtitle>
+          <ion-card-title>Thiago Alves</ion-card-title>
+        </ion-card-header>
+      </ion-row>
+    </ion-grid>
+
+    <ion-card-content>
+      <p>Dados Pessoais</p>
+
+      <ion-input 
+        label="uid" 
+        labelPlacement="stacked"
+        value="{{ userData.uid }}">
+      </ion-input>
+
+      <ion-input 
+        label="Tema" 
+        labelPlacement="stacked"
+        value="Desenvolvimento Mobile">
+      </ion-input>
+      
+      <ion-input 
+        label="Curso" 
+        labelPlacement="stacked"
+        value="Ciências da Computação">
+      </ion-input>
+
+      <ion-input 
+        label="Universidade" 
+        labelPlacement="stacked"
+        value="FUMEC">
+      </ion-input>
+
+      <ion-input 
+        label="Gênero" 
+        labelPlacement="stacked"
+        value="Masculino">
+      </ion-input>
+      
+      <ion-input 
+        label="Data de Nascimento" 
+        labelPlacement="stacked"
+        value="15/10/1996">
+      </ion-input>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button id="profile-modal">
+      <ion-icon name="pencil-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal trigger="profile-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancelar</ion-button>
+          </ion-buttons>
+          <ion-title>Atualizar Dados</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+          <ion-input
+            label="Nome"
+            labelPlacement="stacked"
+            fill="outline"
+            type="text"
+            value="Thiago Alves"
+            class="ion-margin-bottom"
+          ></ion-input>
+
+          <ion-select
+            label="Tema"
+            label-placement="floating"
+            fill="outline"
+            placeholder=""
+            class="ion-margin-bottom"
+            value="Desenvolvimento Mobile">
+            <ion-select-option value="Desenvolvimento Mobile">
+              Desenvolvimento Mobile
+            </ion-select-option>
+            <ion-select-option value="CyberSegurança">CyberSegurança</ion-select-option>
+            <ion-select-option value="Banco de Dados">Banco de Dados</ion-select-option>
+          </ion-select>
+
+          <ion-select 
+            label="Curso" 
+            label-placement="floating" 
+            fill="outline"
+            class="ion-margin-bottom"
+            value="Ciências da Computação">
+            <ion-select-option value="Ciências da Computação">
+              Ciências da Computação
+            </ion-select-option>
+            <ion-select-option value="Sistemas de Informação">
+              Sistemas de Informação
+              </ion-select-option>
+            <ion-select-option value="Engenharia da Computação">
+              Engenharia da Computação
+              </ion-select-option>
+          </ion-select>
+
+          <ion-select 
+            label="Universidade" 
+            label-placement="floating" 
+            fill="outline"
+            class="ion-margin-bottom"
+            value="FUMEC">
+            <ion-select-option value="FUMEC">
+              FUMEC
+            </ion-select-option>
+            <ion-select-option value="UFMG">
+              UFMG
+              </ion-select-option>
+            <ion-select-option value="PUC">
+              PUC
+              </ion-select-option>
+          </ion-select>
+
+          <ion-select 
+            label="Gênero" 
+            label-placement="floating" 
+            fill="outline"
+            value="Masculino"
+            class="ion-margin-bottom">
+              <ion-select-option value="Masculino">Masculino</ion-select-option>
+              <ion-select-option value="Feminino">Feminino</ion-select-option>
+              <ion-select-option value="Prefiro não dizer">Prefiro não dizer</ion-select-option>
+          </ion-select>
+
+          <ion-input
+            label="Data de Nascimento"
+            labelPlacement="stacked"
+            fill="outline"
+            type="date"
+            value="15/10/1996"
+            class="ion-margin-bottom"
+          ></ion-input>
+
+          <ion-button 
+            type="submit" 
+            expand="block"
+            (click)="confirm()"
+            class="ion-margin-top ion-margin-bottom">
+            Atualizar
+          </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

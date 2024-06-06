@@ -1,0 +1,154 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Pesquisar</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Pesquisar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-segment value="articles" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="articles">
+      <ion-label>Artigos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="books">
+      <ion-label>Livros</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="videos">
+      <ion-label>Vídeos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-card *ngIf="selectedSegment === 'articles'">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="document" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+          <ion-button fill="clear" color="light">
+            <ion-icon name="heart"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="document" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+          <ion-button fill="clear" color="light">
+            <ion-icon name="heart"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-button fill="clear" size="">
+              <ion-label color="primary">Mostrar mais</ion-label>
+            </ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="selectedSegment === 'books'">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="book-outline" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+          <ion-button fill="clear" color="light">
+            <ion-icon name="heart"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="book-outline" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+          <ion-button fill="clear" color="light">
+            <ion-icon name="heart"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-button fill="clear" size="">
+              <ion-label color="primary">Mostrar mais</ion-label>
+            </ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="selectedSegment === 'videos'">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="videocam-outline" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+          <ion-button fill="clear" color="light">
+            <ion-icon name="heart"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="videocam-outline" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+          <ion-button fill="clear" color="light">
+            <ion-icon name="heart"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-button fill="clear" size="">
+              <ion-label color="primary">Mostrar mais</ion-label>
+            </ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,118 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Modelos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Modelos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="document" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit.docx</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="albums-outline" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit.pptx</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="">
+            <ion-icon name="videocam-outline" size="large"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>Lorem ipsum, dolor sit.mp4</h3>
+            <p>Lorem ipsum, dolor sit</p>
+            <p>Data: 30/04/2024</p></ion-label
+          >
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button id="templates-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <ion-modal trigger="templates-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancelar</ion-button>
+          </ion-buttons>
+          <ion-title>Novo Modelo</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+          <ion-input
+            label="Nome do modelo"
+            labelPlacement="stacked"
+            type="text"
+            fill="outline"
+            placeholder="Nome"
+            [(ngModel)]="name"
+            class="ion-margin-bottom"
+          ></ion-input>
+
+          <ion-input
+            label="Descrição"
+            labelPlacement="stacked"
+            type="text"
+            fill="outline"
+            placeholder="Descrição"
+            [(ngModel)]="name"
+            class="ion-margin-bottom"
+          ></ion-input>
+
+          <ion-select 
+            label="Formato" 
+            placeholder="Selecione o formato" 
+            label-placement="stacked"
+            fill="outline"
+            class="ion-margin-bottom">
+            <ion-select-option value="docx">Texto</ion-select-option>
+            <ion-select-option value="pptx">Apresentação</ion-select-option>
+            <ion-select-option value="mov">Vídeo</ion-select-option>
+          </ion-select>
+
+          <ion-label>Anexar Arquivo</ion-label>
+          <input type="file" (change)="onFileSelected($event)">
+
+          <ion-button 
+            type="submit" 
+            expand="block"
+            (click)="confirm()"
+            class="ion-margin-top">
+            Adicionar
+          </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+</ion-content>
+
+<!-- [disabled]="!form.valid" -->

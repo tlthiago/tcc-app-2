@@ -6,6 +6,29 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+    children: [
+      {
+        path: 'search',
+        loadChildren: () => import('../search/search.module').then(m => m.SearchPageModule)
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+      },
+      {
+        path: 'bookmarks',
+        loadChildren: () => import('../bookmarks/bookmarks.module').then(m => m.BookmarksPageModule)
+      },
+      {
+        path: 'templates',
+        loadChildren: () => import('../templates/templates.module').then(m => m.TemplatesPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '/home/search',
+        pathMatch: 'full'
+      }
+    ]
   }
 ];
 

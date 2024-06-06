@@ -24,13 +24,13 @@ import { provideStorage, getStorage } from 'node_modules/@angular/fire/storage';
       useClass: IonicRouteStrategy 
     }, 
     provideFirebaseApp(() => initializeApp({
-      "projectId":"tcc-app-faadc",
-      "appId":"1:265205191210:web:287b57dccc0e3e5808a953",
-      "databaseURL":"https://tcc-app-faadc-default-rtdb.firebaseio.com",
-      "storageBucket":"tcc-app-faadc.appspot.com",
-      "apiKey":"AIzaSyBJyT7TP-NOvpHl617G1NE-PXsyQEGAWIc",
-      "authDomain":"tcc-app-faadc.firebaseapp.com",
-      "messagingSenderId":"265205191210"})
+      apiKey: "AIzaSyBJyT7TP-NOvpHl617G1NE-PXsyQEGAWIc",
+      authDomain: "tcc-app-faadc.firebaseapp.com",
+      databaseURL: "https://tcc-app-faadc-default-rtdb.firebaseio.com",
+      projectId: "tcc-app-faadc",
+      storageBucket: "tcc-app-faadc.appspot.com",
+      messagingSenderId: "265205191210",
+      appId: "1:265205191210:web:287b57dccc0e3e5808a953"})
     ), 
     provideAuth(() => getAuth()), 
     provideFirestore(() => getFirestore()),
