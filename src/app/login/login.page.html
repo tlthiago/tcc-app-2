@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-content>
+      <form (ngSubmit)="login()" [formGroup]="form">
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="floating"></ion-label>
+          <ion-input 
+            label="Email" 
+            label-placement="floating" 
+            fill="outline" 
+            placeholder="Insira o seu email" 
+            type="email"
+            id="email"
+            class="email"
+            formControlName="email">
+          </ion-input>
+          <ion-text 
+            color="danger" 
+            *ngIf="(form.get('email')?.errors?.['required'] || 
+            form.get('email')?.errors?.['email'] ) && 
+            form.get('email')?.touched">
+            Informe o seu e-mail.
+          </ion-text>
+        </ion-item>
+    
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="floating"></ion-label>
+          <ion-input 
+            label="Senha" 
+            label-placement="floating"
+            fill="outline" 
+            placeholder="Insira sua senha" 
+            type="password"
+            id="password"
+            class="password"
+            formControlName="password">
+              <!-- <ion-input-password-toggle slot="end"></ion-input-password-toggle> -->
+          </ion-input>
+          <ion-text 
+            color="danger" 
+            *ngIf="(form.get('password')?.errors?.['required'] || 
+            form.get('password')?.errors?.['minlength'] || 
+            form.get('password')?.errors?.['maxlength']) && 
+            form.get('password')?.touched">Informe a sua senha.
+          </ion-text>
+        </ion-item>
+          
+        <ion-button 
+          type="submit" 
+          expand="block"
+          [disabled]="!form.valid"
+          class="ion-margin-bottom">
+          Entrar
+        </ion-button>
+    
+        <p>
+          Não possui uma conta?
+          <ion-text color="primary">
+            <a [routerLink]="['/register']">crie uma.</a>
+          </ion-text>
+        </p>
+
+        <!-- <span></span> -->
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

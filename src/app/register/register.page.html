@@ -1,0 +1,262 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Criar conta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Criar conta</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-content>
+        <form [formGroup]="form" (ngSubmit)="register()">
+          <ion-item class="ion-margin-bottom">
+            <ion-label position="floating"></ion-label>
+            <ion-input 
+              label="Nome" 
+              label-placement="floating" 
+              fill="outline" 
+              placeholder="Insira o seu nome" 
+              type="text"
+              id="nome"
+              class="nome"
+              formControlName="nome">
+            </ion-input>
+            <ion-text color="danger" 
+              *ngIf="(form.get('nome')?.errors?.['required'] || 
+              form.get('nome')?.errors?.['minlength'] || 
+              form.get('nome')?.errors?.['maxlength']) && 
+              form.get('nome')?.touched">
+              Informe um nome que tenha de 3 a 30 caracteres!
+            </ion-text>
+          </ion-item>
+          
+          <ion-item class="ion-margin-bottom">
+            <ion-label position="floating"></ion-label>
+            <ion-input 
+              label="Sobrenome" 
+              label-placement="floating" 
+              fill="outline" 
+              placeholder="Insira o seu sobrenome" 
+              type="text"
+              id="sobrenome"
+              class="sobrenome"
+              formControlName="sobrenome">
+            </ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('sobrenome')?.errors?.['required'] || 
+              form.get('sobrenome')?.errors?.['minlength'] || 
+              form.get('sobrenome')?.errors?.['maxlength']) && 
+              form.get('sobrenome')?.touched">
+              Informe um sobrenome que tenha de 3 a 30 caracteres!
+            </ion-text>
+          </ion-item>
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-around">
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating"></ion-label>
+                  <ion-input 
+                    label="Dia" 
+                    label-placement="floating" 
+                    fill="outline" 
+                    placeholder="Dia" 
+                    type="number"
+                    id="dia"
+                    class="dia"
+                    formControlName="dia">
+                  </ion-input>
+                  <ion-text 
+                    color="danger" 
+                    *ngIf="(form.get('dia')?.errors?.['required'] || 
+                    form.get('dia')?.errors?.['minlength'] || 
+                    form.get('dia')?.errors?.['maxlength']) && 
+                    form.get('dia')?.touched">
+                    Informe o dia do seu nascimento!
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating"></ion-label>
+                  <ion-select 
+                    label="Mês" 
+                    label-placement="floating" 
+                    fill="outline"
+                    id="mes"
+                    class="mes"
+                    formControlName="mes">
+                      <ion-select-option value="janeiro">Janeiro</ion-select-option>
+                      <ion-select-option value="fevereiro">Fevereiro</ion-select-option>
+                      <ion-select-option value="março">Março</ion-select-option>
+                      <ion-select-option value="abril">Abril</ion-select-option>
+                      <ion-select-option value="maio">Maio</ion-select-option>
+                      <ion-select-option value="junho">Junho</ion-select-option>
+                      <ion-select-option value="julho">Julho</ion-select-option>
+                      <ion-select-option value="agosto">Agosto</ion-select-option>
+                      <ion-select-option value="setembro">Setembro</ion-select-option>
+                      <ion-select-option value="outubro">Outubro</ion-select-option>
+                      <ion-select-option value="novembro">Novembro</ion-select-option>
+                      <ion-select-option value="dezembro">Dezembro</ion-select-option>
+                  </ion-select>
+                  <ion-text 
+                    color="danger" 
+                    *ngIf="(form.get('mes')?.errors?.['required']) && 
+                    form.get('mes')?.touched">
+                    Informe o mes do seu nascimento!
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating"></ion-label>
+                  <ion-input 
+                    label="Ano" 
+                    label-placement="floating" 
+                    fill="outline" 
+                    placeholder="Ano" 
+                    type="number"
+                    id="ano"
+                    class="ano"
+                    formControlName="ano">
+                  </ion-input>
+                  <ion-text 
+                    color="danger" 
+                    *ngIf="(form.get('ano')?.errors?.['required'] || 
+                    form.get('ano')?.errors?.['minlength'] || 
+                    form.get('ano')?.errors?.['maxlength']) && 
+                    form.get('ano')?.touched">
+                    Informe o ano do seu nascimento!
+                  </ion-text>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-item class="ion-margin-bottom">
+            <ion-label position="floating"></ion-label>
+            <ion-select 
+              label="Gênero" 
+              label-placement="floating" 
+              fill="outline"
+              id="genero"
+              class="genero"
+              formControlName="genero">
+                <ion-select-option value="homem">Homem</ion-select-option>
+                <ion-select-option value="mulher">Mulher</ion-select-option>
+                <ion-select-option value="naoInformado">Prefiro não dizer</ion-select-option>
+            </ion-select>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('genero')?.errors?.['required']) && 
+              form.get('genero')?.touched">
+              Selecione o gênero!
+            </ion-text>
+          </ion-item>
+
+          <!-- <ion-item>
+            <ion-input 
+              label="Celular" 
+              label-placement="floating" 
+              fill="outline" 
+              placeholder="Insira o seu número de celular" 
+              type=""
+              id="celular"
+              class="celular">
+            </ion-input>
+          </ion-item> -->
+
+          <ion-item class="ion-margin-bottom">
+            <ion-label position="floating"></ion-label>
+            <ion-input 
+              label="Email" 
+              label-placement="floating" 
+              fill="outline" 
+              placeholder="Insira o seu email" 
+              type="email"
+              id="email"
+              class="email"
+              formControlName="email">
+            </ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('email')?.errors?.['required'] || 
+              form.get('email')?.errors?.['email'] ) && 
+              form.get('email')?.touched">
+              Informe um e-mail válido.
+            </ion-text>
+          </ion-item>
+
+          <ion-item class="ion-margin-bottom">
+            <ion-label position="floating"></ion-label>
+            <ion-input 
+              label="Senha" 
+              label-placement="floating" 
+              fill="outline" 
+              placeholder="Insira sua senha" 
+              type="password"
+              id="senha"
+              class="senha"
+              formControlName="senha">
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('senha')?.errors?.['required'] || 
+              form.get('senha')?.errors?.['minlength'] || 
+              form.get('senha')?.errors?.['maxlength']) && 
+              form.get('senha')?.touched">Informe uma senha que tenha entre 6 e 12 dígitos.
+            </ion-text>
+          </ion-item>
+
+          <ion-item class="ion-margin-bottom">
+            <ion-label position="floating"></ion-label>
+            <ion-input 
+              label="Confirmar Senha" 
+              label-placement="floating" 
+              fill="outline" 
+              placeholder="Insira a senha anterior" 
+              type="password"
+              id="senhaConfirm"
+              class="senhaConfirm"
+              formControlName="senhaConfirm">
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            </ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('senhaConfirm')?.errors?.['required'] || 
+              form.get('senhaConfirm')?.errors?.['minlength'] || 
+              form.get('senhaConfirm')?.errors?.['maxlength']) && 
+              form.get('senhaConfirm')?.touched">
+              As senhas não conferem.
+            </ion-text>
+          </ion-item>
+          
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col>
+                <ion-button [routerLink]="['/login']">Voltar</ion-button>
+              </ion-col>
+
+              <ion-col>
+                <ion-button 
+                  type="submit"
+                  expand="block"
+                  [disabled]="!form.valid">
+                  Criar conta
+              </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-card-content>
+    </ion-card>
+</ion-content>
