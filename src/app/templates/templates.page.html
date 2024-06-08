@@ -14,37 +14,19 @@
   <ion-card>
     <ion-card-content>
       <ion-list>
-        <ion-item>
+        <ion-item *ngFor="let model of models; let i = index">
           <ion-thumbnail slot="">
-            <ion-icon name="document" size="large"></ion-icon>
+            <ng-container [ngSwitch]="model.formato">
+              <ion-icon *ngSwitchCase="'Texto'" name="document" size="large"></ion-icon>
+              <ion-icon *ngSwitchCase="'Apresentação'" name="albums-outline" size="large"></ion-icon>
+              <ion-icon *ngSwitchCase="'Vídeo'" name="videocam-outline" size="large"></ion-icon>
+            </ng-container>
           </ion-thumbnail>
           <ion-label>
-            <h3>Lorem ipsum, dolor sit.docx</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
-          >
-        </ion-item>
-
-        <ion-item>
-          <ion-thumbnail slot="">
-            <ion-icon name="albums-outline" size="large"></ion-icon>
-          </ion-thumbnail>
-          <ion-label>
-            <h3>Lorem ipsum, dolor sit.pptx</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
-          >
-        </ion-item>
-
-        <ion-item>
-          <ion-thumbnail slot="">
-            <ion-icon name="videocam-outline" size="large"></ion-icon>
-          </ion-thumbnail>
-          <ion-label>
-            <h3>Lorem ipsum, dolor sit.mp4</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
-          >
+            <h3>{{ model.titulo }}</h3>
+            <p>{{ model.descricao }}</p>
+            <p>{{ model.dataPublicacao }}</p>
+          </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -56,7 +38,8 @@
     </ion-fab-button>
   </ion-fab>
   
-  <ion-modal trigger="templates-modal" (willDismiss)="onWillDismiss($event)">
+  <!-- (willDismiss)="onWillDismiss($event)" -->
+  <ion-modal trigger="templates-modal">
     <ng-template>
       <ion-header>
         <ion-toolbar color="primary">
@@ -67,44 +50,66 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-          <ion-input
-            label="Nome do modelo"
-            labelPlacement="stacked"
-            type="text"
-            fill="outline"
-            placeholder="Nome"
-            [(ngModel)]="name"
-            class="ion-margin-bottom"
-          ></ion-input>
+          <form [formGroup]="form" (ngSubmit)="confirm()">
+            <ion-input
+              label="Nome do modelo"
+              labelPlacement="stacked"
+              fill="outline"
+              type="text"
+              placeholder="Nome"
+              formControlName="titulo"
+            ></ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('titulo')?.errors?.['required'] || 
+              form.get('titulo')?.errors?.['minlength']) &&
+              form.get('titulo')?.touched">
+              Informe um nome com no mínimo 2 caracteres.
+            </ion-text>
 
-          <ion-input
-            label="Descrição"
-            labelPlacement="stacked"
-            type="text"
-            fill="outline"
-            placeholder="Descrição"
-            [(ngModel)]="name"
-            class="ion-margin-bottom"
-          ></ion-input>
+            <ion-input
+              label="Descrição"
+              labelPlacement="stacked"
+              fill="outline"
+              type="text"
+              placeholder="Descrição"
+              formControlName="descricao"
+              class="ion-margin-top"
+            ></ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('descricao')?.errors?.['required'] || 
+              form.get('descricao')?.errors?.['minlength']) &&
+              form.get('descricao')?.touched">
+              Informe uma descrição com no mínimo 3 caracteres.
+            </ion-text>
 
-          <ion-select 
-            label="Formato" 
-            placeholder="Selecione o formato" 
-            label-placement="stacked"
-            fill="outline"
-            class="ion-margin-bottom">
-            <ion-select-option value="docx">Texto</ion-select-option>
-            <ion-select-option value="pptx">Apresentação</ion-select-option>
-            <ion-select-option value="mov">Vídeo</ion-select-option>
-          </ion-select>
+            <ion-select 
+              label="Formato" 
+              placeholder="Selecione o formato" 
+              label-placement="stacked"
+              fill="outline"
+              formControlName="formato"
+              class="ion-margin-top">
+              <ion-select-option value="docx">Texto</ion-select-option>
+              <ion-select-option value="pptx">Apresentação</ion-select-option>
+              <ion-select-option value="mov">Vídeo</ion-select-option>
+            </ion-select>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('formato')?.errors?.['required']) &&
+              form.get('formato')?.touched">
+              Selecione um formato.
+            </ion-text>
 
-          <ion-label>Anexar Arquivo</ion-label>
-          <input type="file" (change)="onFileSelected($event)">
+            <ion-label>Anexar Arquivo</ion-label>
+            <input type="file" (change)="onFileSelected($event)">
+          </form>
 
           <ion-button 
             type="submit" 
             expand="block"
-            (click)="confirm()"
+            [disabled]="!form.valid"
             class="ion-margin-top">
             Adicionar
           </ion-button>

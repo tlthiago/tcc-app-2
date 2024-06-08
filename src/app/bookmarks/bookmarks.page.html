@@ -14,141 +14,113 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-segment value="bookmarksArticles" (ionChange)="bookmarksSegmentChanged($event)">
-    <ion-segment-button value="bookmarksArticles">
+  <ion-segment value="articles" (ionChange)="bookmarksSegmentChanged($event)">
+    <ion-segment-button value="articles">
       <ion-label>Artigos</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="bookmarksBooks">
+    <ion-segment-button value="books">
       <ion-label>Livros</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="bookmarksVideos">
+    <ion-segment-button value="videos">
       <ion-label>Vídeos</ion-label>
     </ion-segment-button>
   </ion-segment>
 
-  <ion-card *ngIf="selectedBookmarksSegment === 'bookmarksArticles'">
+  <ion-card *ngIf="selectedBookmarksSegment === 'articles'">
     <ion-card-content>
       <ion-list>
-        <ion-item>
+        <ion-item *ngFor="let article of contents; let i = index">
           <ion-thumbnail slot="">
             <ion-icon name="document" size="large"></ion-icon>
           </ion-thumbnail>
           <ion-label>
-            <h3>Lorem ipsum, dolor sit</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
-          >
-          <ion-button fill="clear">
-            <ion-icon name="heart" color="primary"></ion-icon>
+            <h3>{{ article.titulo }}</h3>
+            <p>{{ article.descricao }}</p>
+            <p>{{ article.dataPublicacao }}</p>
+          </ion-label>
+          <ion-button fill="clear" (click)="unfavorite(article.id)">
+            <ion-icon 
+              name="heart" 
+              [color]="article.favorito ? 'primary' : 'light'"
+            >
+            </ion-icon>
           </ion-button>
         </ion-item>
-
-        <ion-item>
-          <ion-thumbnail slot="">
-            <ion-icon name="document" size="large"></ion-icon>
-          </ion-thumbnail>
-          <ion-label>
-            <h3>Lorem ipsum, dolor sit</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
-          >
-          <ion-button fill="clear">
-            <ion-icon name="heart" color="primary"></ion-icon>
-          </ion-button>
-        </ion-item>
-
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-button fill="clear" size="">
-              <ion-label color="primary">Mostrar mais</ion-label>
-            </ion-button>
-          </ion-row>
-        </ion-grid>
       </ion-list>
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-button fill="clear" size="">
+            <ion-label color="primary">Mostrar mais</ion-label>
+          </ion-button>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="selectedBookmarksSegment === 'bookmarksBooks'">
+  <ion-card *ngIf="selectedBookmarksSegment === 'books'">
     <ion-card-content>
       <ion-list>
-        <ion-item>
+        <ion-item *ngFor="let book of contents; let i = index">
           <ion-thumbnail slot="">
             <ion-icon name="book-outline" size="large"></ion-icon>
           </ion-thumbnail>
           <ion-label>
-            <h3>Lorem ipsum, dolor sit</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
+            <h3>{{ book.titulo }}</h3>
+            <p>{{ book.descricao }}</p>
+            <p>{{ book.dataPublicacao }}</p>
+          </ion-label
           >
-          <ion-button fill="clear">
-            <ion-icon name="heart" color="primary"></ion-icon>
+          <ion-button fill="clear" (click)="unfavorite(book.id)">
+            <ion-icon 
+              name="heart" 
+              [color]="book.favorito ? 'primary' : 'light'"
+            >
+            </ion-icon>
           </ion-button>
         </ion-item>
-
-        <ion-item>
-          <ion-thumbnail slot="">
-            <ion-icon name="book-outline" size="large"></ion-icon>
-          </ion-thumbnail>
-          <ion-label>
-            <h3>Lorem ipsum, dolor sit</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
-          >
-          <ion-button fill="clear">
-            <ion-icon name="heart" color="primary"></ion-icon>
-          </ion-button>
-        </ion-item>
-
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-button fill="clear" size="">
-              <ion-label color="primary">Mostrar mais</ion-label>
-            </ion-button>
-          </ion-row>
-        </ion-grid>
       </ion-list>
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-button fill="clear" size="">
+            <ion-label color="primary">Mostrar mais</ion-label>
+          </ion-button>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="selectedBookmarksSegment === 'bookmarksVideos'">
+  <ion-card *ngIf="selectedBookmarksSegment === 'videos'">
     <ion-card-content>
       <ion-list>
-        <ion-item>
+        <ion-item *ngFor="let video of contents; let i = index">
           <ion-thumbnail slot="">
             <ion-icon name="videocam-outline" size="large"></ion-icon>
           </ion-thumbnail>
           <ion-label>
-            <h3>Lorem ipsum, dolor sit</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
+            <h3>{{ video.titulo }}</h3>
+            <p>{{ video.descricao }}</p>
+            <p>{{ video.dataPublicacao }}</p>
+          </ion-label
           >
-          <ion-button fill="clear">
-            <ion-icon name="heart" color="primary"></ion-icon>
+          <ion-button fill="clear" (click)="unfavorite(video.id)">
+            <ion-icon 
+              name="heart" 
+              [color]="video.favorito ? 'primary' : 'light'"
+            >
+            </ion-icon>
           </ion-button>
         </ion-item>
-
-        <ion-item>
-          <ion-thumbnail slot="">
-            <ion-icon name="videocam-outline" size="large"></ion-icon>
-          </ion-thumbnail>
-          <ion-label>
-            <h3>Lorem ipsum, dolor sit</h3>
-            <p>Lorem ipsum, dolor sit</p>
-            <p>Data: 30/04/2024</p></ion-label
-          >
-          <ion-button fill="clear">
-            <ion-icon name="heart" color="primary"></ion-icon>
-          </ion-button>
-        </ion-item>
-
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-button fill="clear" size="">
-              <ion-label color="primary">Mostrar mais</ion-label>
-            </ion-button>
-          </ion-row>
-        </ion-grid>
       </ion-list>
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-button fill="clear" size="">
+            <ion-label color="primary">Mostrar mais</ion-label>
+          </ion-button>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>

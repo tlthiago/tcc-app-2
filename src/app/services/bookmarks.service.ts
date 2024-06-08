@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection } from '@angular/fire/firestore';
-import { getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { IContent } from 'src/models/content.model';
 
 @Injectable({
@@ -32,12 +32,10 @@ export class BookmarksService {
   }
 
   async removeFromFavorites(id: string): Promise<void> {
-    const collections = collection(this.firestore, 'content');
-    const statement = query(collections, where('id', "==", id));
-    const querySnapshot = await getDocs(statement);
+    const contentDocRef = doc(this.firestore, 'content', id);
+    const docSnapshot = await getDoc(contentDocRef);
 
-    if (!querySnapshot.empty) {
-      const contentDocRef = querySnapshot.docs[0].ref;
+    if (docSnapshot.exists()) {
       await updateDoc(contentDocRef, { favorito: false });
     } else {
       throw new Error('Conteúdo não encontrado.');

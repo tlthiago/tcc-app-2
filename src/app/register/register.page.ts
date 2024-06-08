@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Validacoes } from '../utils/validacoes';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from "@ionic/angular";

@@ -22,6 +22,10 @@ export class SearchPage implements OnInit {
     this.getContents(this.selectedSegment)
   }
 
+  ionViewWillEnter() {
+    this.getContents(this.selectedSegment);
+  }
+
   getContents(type) {
     this.contentService.getContent(type).then(contents => {
       this.contents = contents;

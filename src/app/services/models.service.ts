@@ -17,10 +17,10 @@ export class ModelsService {
 
   public getModels(): Observable<IModels[]> {
     const mCollection = collection(this.firestore, 'models');
-      return collectionData(mCollection, { idField: 'id' })
-      .pipe(
-        map(models => models as IModels[])
-      );
+    return collectionData(mCollection, { idField: 'id' })
+    .pipe(
+      map(models => models as IModels[])
+    );
   }
 
   public async createModels(newModel: IModels): Promise<IModels> {
