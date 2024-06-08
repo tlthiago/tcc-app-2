@@ -25,7 +25,7 @@
         <ion-card-header class="ion-text-center">
           <!-- <ion-card-subtitle >thiago96luiz&#64;gmail.com</ion-card-subtitle>
           <ion-card-title>Thiago Alves</ion-card-title> -->
-          <ion-card-subtitle >{{ userData.email }}</ion-card-subtitle>
+          <ion-card-subtitle >{{ userData?.email }}</ion-card-subtitle>
           <ion-card-title>Thiago Alves</ion-card-title>
         </ion-card-header>
       </ion-row>
@@ -37,7 +37,7 @@
       <ion-input 
         label="uid" 
         labelPlacement="stacked"
-        value="{{ userData.uid }}">
+        value="{{ userData?.uid }}">
       </ion-input>
 
       <ion-input 
