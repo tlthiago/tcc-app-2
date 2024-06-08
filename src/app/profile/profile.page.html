@@ -25,8 +25,8 @@
         <ion-card-header class="ion-text-center">
           <!-- <ion-card-subtitle >thiago96luiz&#64;gmail.com</ion-card-subtitle>
           <ion-card-title>Thiago Alves</ion-card-title> -->
-          <ion-card-subtitle >{{ userData?.email }}</ion-card-subtitle>
-          <ion-card-title>Thiago Alves</ion-card-title>
+          <ion-card-subtitle >{{ authUserData?.email }}</ion-card-subtitle>
+          <ion-card-title>{{ userData?.nome }} {{userData?.sobrenome}}</ion-card-title>
         </ion-card-header>
       </ion-row>
     </ion-grid>
@@ -37,37 +37,37 @@
       <ion-input 
         label="uid" 
         labelPlacement="stacked"
-        value="{{ userData?.uid }}">
+        value="{{ authUserData?.uid }}">
       </ion-input>
 
       <ion-input 
-        label="Tema" 
+        label="Data de Nascimento" 
         labelPlacement="stacked"
-        value="Desenvolvimento Mobile">
-      </ion-input>
-      
-      <ion-input 
-        label="Curso" 
-        labelPlacement="stacked"
-        value="Ciências da Computação">
-      </ion-input>
-
-      <ion-input 
-        label="Universidade" 
-        labelPlacement="stacked"
-        value="FUMEC">
+        value="{{ userData?.dataNascimento }}">
       </ion-input>
 
       <ion-input 
         label="Gênero" 
         labelPlacement="stacked"
-        value="Masculino">
+        value="{{ userData?.genero }}">
+      </ion-input>
+
+      <ion-input 
+        label="Tema" 
+        labelPlacement="stacked"
+        value="{{ userData?.tema }}">
       </ion-input>
       
       <ion-input 
-        label="Data de Nascimento" 
+        label="Curso" 
         labelPlacement="stacked"
-        value="15/10/1996">
+        value="{{ userData?.curso }}">
+      </ion-input>
+
+      <ion-input 
+        label="Universidade" 
+        labelPlacement="stacked"
+        value="{{ userData?.universidade }}">
       </ion-input>
     </ion-card-content>
   </ion-card>
@@ -78,7 +78,8 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-modal trigger="profile-modal" (willDismiss)="onWillDismiss($event)">
+  <!-- (willDismiss)="onWillDismiss($event)" -->
+  <ion-modal trigger="profile-modal" >
     <ng-template>
       <ion-header>
         <ion-toolbar color="primary">
@@ -89,90 +90,137 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-          <ion-input
-            label="Nome"
-            labelPlacement="stacked"
-            fill="outline"
-            type="text"
-            value="Thiago Alves"
-            class="ion-margin-bottom"
-          ></ion-input>
+          <form [formGroup]="form" (ngSubmit)="confirm()">
+            <ion-input
+              label="Nome"
+              labelPlacement="stacked"
+              fill="outline"
+              type="text"
+              formControlName="nome"
+              [(ngModel)]="userData.nome"
+              class="ion-margin-top"
+            ></ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('nome')?.errors?.['required'] || 
+              form.get('nome')?.errors?.['minlength']) &&
+              form.get('nome')?.touched">
+              Informe um nome com no mínimo 3 caracteres.
+            </ion-text>
 
-          <ion-select
-            label="Tema"
-            label-placement="floating"
-            fill="outline"
-            placeholder=""
-            class="ion-margin-bottom"
-            value="Desenvolvimento Mobile">
-            <ion-select-option value="Desenvolvimento Mobile">
-              Desenvolvimento Mobile
-            </ion-select-option>
-            <ion-select-option value="CyberSegurança">CyberSegurança</ion-select-option>
-            <ion-select-option value="Banco de Dados">Banco de Dados</ion-select-option>
-          </ion-select>
+            <ion-input
+              label="Sobrenome"
+              labelPlacement="stacked"
+              fill="outline"
+              type="text"
+              formControlName="sobrenome"
+              [(ngModel)]="userData.sobrenome"
+              class="ion-margin-top"
+            ></ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('sobrenome')?.errors?.['required'] || 
+              form.get('sobrenome')?.errors?.['minlength']) &&
+              form.get('sobrenome')?.touched">
+              Informe um sobrenome com no mínimo 3 caracteres.
+            </ion-text>
 
-          <ion-select 
-            label="Curso" 
-            label-placement="floating" 
-            fill="outline"
-            class="ion-margin-bottom"
-            value="Ciências da Computação">
-            <ion-select-option value="Ciências da Computação">
-              Ciências da Computação
-            </ion-select-option>
-            <ion-select-option value="Sistemas de Informação">
-              Sistemas de Informação
-              </ion-select-option>
-            <ion-select-option value="Engenharia da Computação">
-              Engenharia da Computação
-              </ion-select-option>
-          </ion-select>
+            <ion-input
+              label="Data de Nascimento"
+              labelPlacement="stacked"
+              fill="outline"
+              type="date"
+              formControlName="dataNascimento"
+              [(ngModel)]="userData.dataNascimento"
+              class="ion-margin-top"
+            ></ion-input>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('dataNascimento')?.errors?.['required']) &&
+              form.get('dataNascimento')?.touched">
+              Informe a data de nascimento.
+            </ion-text>
 
-          <ion-select 
-            label="Universidade" 
-            label-placement="floating" 
-            fill="outline"
-            class="ion-margin-bottom"
-            value="FUMEC">
-            <ion-select-option value="FUMEC">
-              FUMEC
-            </ion-select-option>
-            <ion-select-option value="UFMG">
-              UFMG
-              </ion-select-option>
-            <ion-select-option value="PUC">
-              PUC
-              </ion-select-option>
-          </ion-select>
+            <ion-select 
+              label="Gênero" 
+              label-placement="floating" 
+              fill="outline"
+              formControlName="genero"
+              [(ngModel)]="userData.genero"
+              class="ion-margin-top">
+                <ion-select-option value="Masculino">Masculino</ion-select-option>
+                <ion-select-option value="Feminino">Feminino</ion-select-option>
+                <ion-select-option value="Prefiro não dizer">Prefiro não dizer</ion-select-option>
+            </ion-select>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('genero')?.errors?.['required']) &&
+              form.get('genero')?.touched">
+              Selecione um genero.
+            </ion-text>
 
-          <ion-select 
-            label="Gênero" 
-            label-placement="floating" 
-            fill="outline"
-            value="Masculino"
-            class="ion-margin-bottom">
-              <ion-select-option value="Masculino">Masculino</ion-select-option>
-              <ion-select-option value="Feminino">Feminino</ion-select-option>
-              <ion-select-option value="Prefiro não dizer">Prefiro não dizer</ion-select-option>
-          </ion-select>
+            <ion-select
+              label="Tema"
+              label-placement="floating"
+              fill="outline"
+              formControlName="tema"
+              [(ngModel)]="userData.tema"
+              class="ion-margin-top">
+              <ion-select-option value="Desenvolvimento Mobile">Desenvolvimento Mobile</ion-select-option>
+              <ion-select-option value="CyberSegurança">CyberSegurança</ion-select-option>
+              <ion-select-option value="Banco de Dados">Banco de Dados</ion-select-option>
+            </ion-select>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('tema')?.errors?.['required']) &&
+              form.get('tema')?.touched">
+              Selecione um tema.
+            </ion-text>
 
-          <ion-input
-            label="Data de Nascimento"
-            labelPlacement="stacked"
-            fill="outline"
-            type="date"
-            value="15/10/1996"
-            class="ion-margin-bottom"
-          ></ion-input>
+            <ion-select 
+              label="Curso" 
+              label-placement="floating" 
+              fill="outline"
+              formControlName="curso"
+              [(ngModel)]="userData.curso"
+              class="ion-margin-top">
+              <ion-select-option value="Ciências da Computação">Ciências da Computação</ion-select-option>
+              <ion-select-option value="Sistemas de Informação">Sistemas de Informação</ion-select-option>
+              <ion-select-option value="Engenharia da Computação">Engenharia da Computação</ion-select-option>
+            </ion-select>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('curso')?.errors?.['required']) &&
+              form.get('curso')?.touched">
+              Selecione um curso.
+            </ion-text>
 
-          <ion-button 
-            type="submit" 
-            expand="block"
-            (click)="confirm()"
-            class="ion-margin-top ion-margin-bottom">
-            Atualizar
-          </ion-button>
+            <ion-select 
+              label="Universidade" 
+              label-placement="floating" 
+              fill="outline"
+              formControlName="universidade"
+              [(ngModel)]="userData.universidade"
+              class="ion-margin-top">
+              <ion-select-option value="FUMEC">FUMEC</ion-select-option>
+              <ion-select-option value="UFMG">UFMG</ion-select-option>
+              <ion-select-option value="PUC">PUC</ion-select-option>
+            </ion-select>
+            <ion-text 
+              color="danger" 
+              *ngIf="(form.get('universidade')?.errors?.['required']) &&
+              form.get('universidade')?.touched">
+              Selecione uma universidade.
+            </ion-text>
+
+            <ion-button 
+              type="submit" 
+              expand="block"
+              [disabled]="!form.valid"
+              class="ion-margin-top">
+              Atualizar
+            </ion-button>
+          </form>
       </ion-content>
     </ng-template>
   </ion-modal>

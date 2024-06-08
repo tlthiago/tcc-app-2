@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, docSnapshots, doc, setDoc, getDoc, deleteDoc, FirestoreModule  } from '@angular/fire/firestore'; 
-import { IUser, createIUser } from 'src/models/user.model';
+import { Firestore, addDoc, collection, getDoc, doc, collectionGroup } from '@angular/fire/firestore';
+import { IUser } from 'src/models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Auth, UserInfo, UserProfile, getIdToken } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
+import { getDocs, query, updateDoc, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -29,35 +30,58 @@ export class UserService {
     }
   }
 
-  get(uid: string): Observable<IUser> {
-    const userRef = doc(this.firestore, 'users', uid);
-    return docSnapshots(userRef)
-    .pipe(
-      map(user => {
-        const uid = user.id;
-        const data = user.data();
-        return { uid, ...data  } as IUser;
-        })
-    );
+  public async createUser(newUser: IUser): Promise<IUser> {
+    try {
+      const userRef = await addDoc(collection(this.firestore, 'users'), {
+        uid: newUser.uid,
+        nome: newUser.nome,
+        sobrenome: newUser.sobrenome,
+        dataNascimento: newUser.dataNascimento,
+        genero: newUser.genero,
+        tema: newUser.tema,
+        curso: newUser.curso,
+        universidade: newUser.universidade
+      });
+
+      console.log("O usuário foi salvo com sucesso, id: ", userRef.id);
+
+      console.log("Salvar --> novoUsuario", newUser);
+
+      this.users.push(newUser);
+      return this.users[ this.users.length-1 ];
+    } catch (e) {
+      return null;
+    }
   }
 
-  public async add(newUser: IUser): Promise<IUser> {
-    const userRef = await addDoc(collection(this.firestore, 'users'), {
-      uid: newUser.uid,
-      nome: newUser.nome,
-      tema: newUser.tema,
-      curso: newUser.curso,
-      universidade: newUser.universidade,
-      genero: newUser.genero,
-      dataNascimento: newUser.dataNascimento
+  async getUser(uid: string): Promise<IUser> {
+    const collections = collection(this.firestore, 'users');
+    const statement = query(collections, where('uid', "==", uid));
+    const querySnapshot = await getDocs(statement);
+
+    let userData: IUser;
+    
+    querySnapshot.forEach((doc) => {
+      userData = doc.data() as IUser;
+
+      return;
     });
 
-    console.log("O usuário foi salvo com sucesso, id: ", userRef.id);
+    return userData;
+  }
 
-    console.log("Salvar --> novoUsuario", newUser);
+  async updateUser(uid: string, userData: IUser): Promise<IUser> {
+    const collections = collection(this.firestore, 'users');
+    const statement = query(collections, where('uid', "==", uid));
+    const querySnapshot = await getDocs(statement);
 
-    this.users.push(newUser);
-    return this.users[ this.users.length-1 ];
+    if (!querySnapshot.empty) {
+      const userDocRef = querySnapshot.docs[0].ref;
+      await updateDoc(userDocRef, { ...userData });
+      return userData;
+    } else {
+      throw new Error('Usuário não encontrado.');
+    }
   }
 
 }

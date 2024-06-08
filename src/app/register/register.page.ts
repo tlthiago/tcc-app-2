@@ -4,6 +4,7 @@ import { Validacoes } from '../utils/validacoes';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from "@ionic/angular";
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -18,32 +19,37 @@ export class RegisterPage implements OnInit {
     private loadingController: LoadingController,
     private alertController: AlertController,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router
   ) {}
 
-  // get nome() {
-  //   return this.form.get('nome');
-  // }
+  get nome() {
+    return this.form.get('nome');
+  }
 
-  // get sobrenome() {
-  //   return this.form.get('sobrenome');
-  // }
+  get sobrenome() {
+    return this.form.get('sobrenome');
+  }
 
-  // get dia() {
-  //   return this.form.get('dia');
-  // }
+  get genero() {
+    return this.form.get('genero');
+  }
 
-  // get mes() {
-  //   return this.form.get('mes');
-  // }
+  get dataNascimento() {
+    return this.form.get('dataNascimento');
+  }
 
-  // get ano() {
-  //   return this.form.get('ano');
-  // }
+  get tema() {
+    return this.form.get('tema');
+  }
 
-  // get genero() {
-  //   return this.form.get('genero');
-  // }
+  get curso() {
+    return this.form.get('curso');
+  }
+
+  get universidade() {
+    return this.form.get('universidade');
+  }
 
   get email() {
     return this.form.get('email');
@@ -53,56 +59,47 @@ export class RegisterPage implements OnInit {
     return this.form.get('password');
   }
 
-  // get senhaConfirm() {
-  //   return this.form.get('senhaConfirm');
-  // }
-
   ngOnInit() {
     this.form = this.formBuilder.group({
-      // nome: ['', 
-      //   Validators.compose([
-      //     Validators.required,
-      //     Validators.minLength(2),
-      //     Validators.maxLength(30)
-      //   ])
-      // ],
-      // sobrenome: ['', 
-      //   Validators.compose([
-      //     Validators.required,
-      //     Validators.minLength(3),
-      //     Validators.maxLength(30)
-      //   ])
-      // ],
-      // dia: ['',
-      //   Validators.compose([
-      //     Validators.required,
-      //     Validators.minLength(2),
-      //     Validators.maxLength(2)
-      //   ])
-      // ],
-      // mes: ['',
-      //   Validators.compose([
-      //     Validators.required,
-      //   ])
-      // ],
-      // ano: ['',
-      //   Validators.compose([
-      //     Validators.required,
-      //     Validators.minLength(4),
-      //     Validators.maxLength(4)
-      //   ])
-      // ],
-      // dataNascimento: ['',
-      //   Validators.compose([
-      //     Validators.required
-      //   ])
-      // ],
-      // genero: ['',
-      //   Validators.compose([
-      //     Validators.required
-      //   ])
-      // ],
-      // celular: ['',  ],
+      nome: ['', 
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30)
+        ])
+      ],
+      sobrenome: ['', 
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30)
+        ])
+      ],
+      dataNascimento: ['',
+        Validators.compose([
+          Validators.required
+        ])
+      ],
+      genero: ['',
+        Validators.compose([
+          Validators.required
+        ])
+      ],
+      tema: ['', 
+        Validators.compose([
+          Validators.required
+        ])
+      ],
+      curso: ['', 
+        Validators.compose([
+          Validators.required
+        ])
+      ],
+      universidade: ['', 
+        Validators.compose([
+          Validators.required
+        ])
+      ],
       email: ['', 
         Validators.compose([
           Validators.required,
@@ -114,17 +111,8 @@ export class RegisterPage implements OnInit {
           Validators.required,
           Validators.minLength(6),
           Validators.maxLength(12),
-          // Validacoes.senhasCombinam('senhaConfirm', true)
         ])
-      ],
-      // senhaConfirm: ['', 
-      // Validators.compose([
-      //   Validators.required,
-      //   Validators.minLength(6),
-      //   Validators.maxLength(12),
-      //   // Validacoes.senhasCombinam('senha', true)
-      // ])
-      // ],
+      ]
     })
   }
 
@@ -133,12 +121,43 @@ export class RegisterPage implements OnInit {
     await loading.present();
 
     const user = await this.authService.register(this.form.value);
-    await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl('/login', { replaceUrl: true });
+      const uid = user.user.uid;
+      
+      const { 
+        nome,
+        sobrenome,
+        dataNascimento,
+        genero,
+        tema,
+        curso,
+        universidade
+      } = this.form.value;
+      
+      const registerData = { 
+        uid,
+        nome,
+        sobrenome,
+        dataNascimento,
+        genero,
+        tema,
+        curso,
+        universidade
+      };
+      
+      const createdUser = await this.userService.createUser(registerData);
+      await loading.dismiss();
+
+      if (createdUser) {        
+        this.router.navigateByUrl('/login', { replaceUrl: true });
+      } else {
+        await loading.dismiss();
+        this.showAlert('Falha no registro dos dados', 'Tente novamente!');
+      }
     } else {
-      this.showAlert('Falha no registro', 'Tente novamente!');
+      await loading.dismiss();
+      this.showAlert('Falha no registro do usuário', 'Tente novamente!');
     }
   }
 

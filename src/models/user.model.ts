@@ -1,23 +1,30 @@
 interface IUser {
   uid: string;
   nome: string;
+  sobrenome: string;
+  dataNascimento: string;
+  genero: string;
   tema: string;
   curso: string;
   universidade: string;
-  genero: string;
-  dataNascimento: Date;
+}
+
+interface IAuthenticatedUserData {
+  uid: string;
+  email: string;
 }
 
 function createIUser() {
   return {
     uid: '',
     nome: '',
+    sobrenome: '',
+    dataNascimento: '',
+    genero: '',
     tema: '',
     curso: '',
-    universidade: '',
-    genero: '',
-    dataNascimento: new Date()
+    universidade: ''
   };
 }
 
-export { IUser, createIUser };
+export { IUser, createIUser, IAuthenticatedUserData };
